@@ -1,0 +1,7 @@
+CREATE TABLE bond (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    maturity_date VARCHAR(255) NOT NULL,
+    overdue BOOLEAN NOT NULL,
+    details VARCHAR(255)
+);
