@@ -7,6 +7,10 @@ const BondDetail = ({ bond }) => {
     <table>
       <tbody>
         <tr>
+          <th>ID</th>
+          <td>{bond.id}</td>
+        </tr>
+        <tr>
           <th>Name</th>
           <td>{bond.name}</td>
         </tr>

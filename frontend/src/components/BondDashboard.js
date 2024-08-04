@@ -21,6 +21,7 @@ const BondDashboard = () => {
         const response = await fetch('http://localhost:8080/api/bonds'); // Replace with your API endpoint
         const data = await response.json();
         setBonds(Array.isArray(data) ? data : []);
+        setFilteredBonds(Array.isArray(data) ? data : []);
       } catch (err) {
         setError(err.message);
       } finally {

@@ -9,6 +9,7 @@ const BondList = ({ bonds }) => {
     <table className="bond-table">
       <thead>
         <tr>
+          <th>ID</th>
           <th>Name</th>
           <th>Maturity Date</th>
           <th>Overdue</th>
@@ -20,6 +21,7 @@ const BondList = ({ bonds }) => {
             <tr
               className={`bond-row ${selectedBondId === bond.id ? 'selected': ''}`} 
               onClick={() => setSelectedBondId(bond.id)}>
+              <td>{bond.id}</td>
               <td>{bond.name}</td>
               <td>{bond.maturityDate}</td>
               <td>{bond.overdue ? 'Yes' : 'No'}</td>
