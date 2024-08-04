@@ -20,6 +20,9 @@ public class Bond {
     @Column(name = "details")
     private String details;
 
+    // Default constructor
+    public Bond() {}
+    
     // Parameterized constructor
     public Bond(String name, String maturityDate, boolean overdue, String details) {
         this.name = name;
