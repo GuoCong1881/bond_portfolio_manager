@@ -32,8 +32,7 @@ const BondDashboard = () => {
     fetchBonds();
   }, []);
 
-  const handleFilterChange = (filters) => {
-    setFilters(filters);
+  const applyFilters = () => {
     const filtered = bonds.filter((bond) => {
       const matchesId = filters.id ? bond.id.toString().includes(filters.id) : true;
       const matchesName = filters.name ? bond.name.includes(filters.name) : true;
@@ -45,12 +44,46 @@ const BondDashboard = () => {
     setFilteredBonds(filtered);
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  const resetFilters = () => {
+    setFilters({
+      id: '',
+      name: '',
+      overdue: '',
+      maturityStart: '',
+      maturityEnd: ''
+    });
+    setFilteredBonds(bonds);
+  };
+
+  const filterOverdueBonds = () => {
+    const overdueBonds = bonds.filter(bond => bond.overdue);
+    setFilteredBonds(overdueBonds);
+  };
+
+  const filterNearMaturityBonds = () => {
+    const now = new Date();
+    const fiveDaysAgo = new Date(now);
+    fiveDaysAgo.setDate(now.getDate() - 5);
+    const fiveDaysLater = new Date(now);
+    fiveDaysLater.setDate(now.getDate() + 5);
+
+    const nearMaturityBonds = bonds.filter(bond => {
+      const maturityDate = new Date(bond.maturityDate);
+      return maturityDate >= fiveDaysAgo && maturityDate <= fiveDaysLater;
+    });
+
+    setFilteredBonds(nearMaturityBonds);
+  };
 
   return (
     <div>
-      <BondFilter filters={filters} onFilterChange={handleFilterChange} />
+      <BondFilter filters={filters} onFilterChange={setFilters} />
+      <button onClick={filterOverdueBonds}>Overdue Bonds</button>
+      <button onClick={filterNearMaturityBonds}>Near Maturity Bonds</button>
+      <button onClick={applyFilters}>Search</button>
+      <button onClick={resetFilters}>Reset</button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
       <BondList bonds={filteredBonds} />
     </div>
   );
