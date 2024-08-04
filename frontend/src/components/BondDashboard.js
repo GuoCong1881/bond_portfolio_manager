@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import BondList from './BondList';
-import BondDetail from './BondDetail';
 
 const BondDashboard = () => {
   const [bonds, setBonds] = useState([]);
-  const [selectedBond, setSelectedBond] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -29,8 +27,7 @@ const BondDashboard = () => {
 
   return (
     <div>
-      <BondList bonds={bonds} onSelectBond={setSelectedBond} />
-      <BondDetail bond={selectedBond} />
+      <BondList bonds={bonds} />
     </div>
   );
 };
