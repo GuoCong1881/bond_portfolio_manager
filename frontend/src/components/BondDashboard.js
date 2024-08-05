@@ -4,8 +4,6 @@ import BondFilter from './BondFilter';
 
 const BondDashboard = () => {
   const [bonds, setBonds] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
     id: '',
     name: '',
@@ -14,6 +12,9 @@ const BondDashboard = () => {
     maturityEnd: ''
   });
   const [filteredBonds, setFilteredBonds] = useState(bonds);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchBonds = async () => {
@@ -77,9 +78,9 @@ const BondDashboard = () => {
 
   return (
     <div>
-      <BondFilter filters={filters} onFilterChange={setFilters} />
       <button onClick={filterOverdueBonds}>Overdue Bonds</button>
       <button onClick={filterNearMaturityBonds}>Near Maturity Bonds</button>
+      <BondFilter filters={filters} onFilterChange={setFilters} />
       <button onClick={applyFilters}>Search</button>
       <button onClick={resetFilters}>Reset</button>
       {loading && <p>Loading...</p>}
